@@ -13,6 +13,14 @@
 	  <maven.compiler.plugin.version>3.5.1</maven.compiler.plugin.version>
   </properties>
   
+   <dependencies>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${servlet.version}</version>
+    </dependency>
+  </dependencies>
+  
   <build>
     <finalName>servlet-todolist</finalName>
     <plugins>
