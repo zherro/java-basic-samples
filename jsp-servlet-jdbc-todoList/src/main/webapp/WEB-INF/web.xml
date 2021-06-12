@@ -3,5 +3,65 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Basic JSP</display-name>
+	<display-name>Basic JSP</display-name>
+
+	<filter>
+	    <filter-name>CorsFilter</filter-name>
+	    <filter-class>br.com.zherro.controller.filter.CORSFilter</filter-class>
+	</filter>
+	 
+	<filter-mapping>
+	    <filter-name>CorsFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<servlet>
+	    <servlet-name>ServletInit</servlet-name>
+	    <display-name>ServletInit</display-name>
+	    <servlet-class>br.com.zherro.controller.ServletInit</servlet-class>
+	    <load-on-startup>0</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>TodoListServlet</servlet-name>
+		<display-name>TodoListServlet</display-name>
+		<description></description>
+		<servlet-class>br.com.zherro.controller.TodoListServlet</servlet-class>
+	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>TodoListServlet</servlet-name>
+		<url-pattern></url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>PostCardServlet</servlet-name>
+		<display-name>PostCardServlet</display-name>
+		<description></description>
+		<servlet-class>br.com.zherro.controller.PostCardServlet</servlet-class>
+	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>PostCardServlet</servlet-name>
+		<url-pattern>/sendCard</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>DeleteCardServelt</servlet-name>
+		<display-name>DeleteCardServelt</display-name>
+		<description></description>
+		<servlet-class>br.com.zherro.controller.DeleteCardServelt</servlet-class>
+	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>DeleteCardServelt</servlet-name>
+		<url-pattern>/deleteCard</url-pattern>
+	</servlet-mapping>
+
 </web-app>
