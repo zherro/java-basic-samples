@@ -5,7 +5,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@include file="templates/header.jsp"%>
-<%@include file="templates/menu.html"%>
+<%@include file="templates/menu.jsp"%>
 
 <div class="container">
 	<div class="row">
@@ -32,8 +32,15 @@
 						<h5 class="card-title"><%= card.getTitle() %></h5>
 						<p class="card-text"><%= card.getDescription() %></p>
 						<div class="d-flex">
-							<a  href="<%= request.getContextPath() + "/editCard.jsp?id=" + card.getId()  %>" class="btn btn-primary w-50 rounded-0">Edit</a>
-							<a onclick="deletePost(<%= card.getId() %>)" href="#" class="btn btn-danger w-50 rounded-0">Delete</a>
+							<div class="w-50">
+								<a  href="<%= request.getContextPath() + "/editCard.jsp?id=" + card.getId()  %>" class="w-100 btn btn-primary rounded-0">Edit</a>
+							</div>
+							<div class="w-50">
+								<form action="" method="post">
+									<input type="hidden" id="id" name="id" value="<%= card.getId() %>" />
+									<button class="w-100 btn btn-danger rounded-0">Delete</button>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -52,7 +59,7 @@
 	 const deletePost = (id) => {
 		 console.log('teste');
 		 $.ajax({
-	         url: <%= '"' + "http://" + request.getRemoteHost() + ":" + request.getLocalPort() + request.getContextPath() + '"' %> + "/deleteCard?id=" + id,
+	         /* url: <%= '"' + "http://" + request.getRemoteHost() + ":" + request.getLocalPort() + request.getContextPath() + '"' %> + "/deleteCard?id=" + id, */
 	         type: 'DELETE',
 	         success: () => { window.location.reload(); },
 	         error: () => {}

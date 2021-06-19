@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.com.zherro.model.TodoFactory;
 
@@ -17,8 +18,10 @@ public class DeleteCardServelt extends HttpServlet {
 		 System.out.println(req.getParameter("id"));
 		 
 		final long id = Long.valueOf( req.getParameter("id") );
-		 
-		 TodoFactory.listCards()
+		
+		HttpSession session = req.getSession(false);
+		
+		 TodoFactory.listCards( (String) session.getAttribute("todoKey") )
 		 	.removeIf( c -> c.getId().equals(id));
 		 
 		 System.out.println("delete");

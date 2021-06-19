@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.com.zherro.domain.Card;
 import br.com.zherro.model.TodoFactory;
@@ -25,7 +26,10 @@ public class PostCardServlet extends HttpServlet {
 		card.setDescription(description);
 		card.setDate( LocalDateTime.now() );
 
-		TodoFactory.addCard(card, id );
+		HttpSession session = req.getSession(false);
+		String todoKey = (String) session.getAttribute("todoKey");
+		
+		TodoFactory.addCard(todoKey, card );
 		
 		resp.sendRedirect(req.getContextPath() + "/");
 	}

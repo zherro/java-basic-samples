@@ -22,6 +22,11 @@
 	    <servlet-class>br.com.zherro.controller.ServletInit</servlet-class>
 	    <load-on-startup>0</load-on-startup>
 	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ServletInit</servlet-name>
+		<url-pattern>/servletInit</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>TodoListServlet</servlet-name>

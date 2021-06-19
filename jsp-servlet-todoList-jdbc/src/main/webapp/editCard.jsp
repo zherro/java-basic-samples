@@ -5,14 +5,15 @@
 	pageEncoding="UTF-8"%>
 
 <%@include file="templates/header.jsp"%>
-<%@include file="templates/menu.html"%>
+<%@include file="templates/menu.jsp"%>
 
 	<div class="container">
 		<div class="row">
 			<div class="col">
 			
 				<%
-					Card card = TodoFactory.getById( Long.valueOf( request.getParameter("id") ) );
+					
+					Card card = TodoFactory.getById( (String) session.getAttribute("todoKey"),   Long.valueOf( request.getParameter("id") ) );
 				
 				%>
 

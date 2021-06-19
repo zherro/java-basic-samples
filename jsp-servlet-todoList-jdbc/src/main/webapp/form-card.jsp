@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@include file="templates/header.jsp"%>
-<%@include file="templates/menu.html"%>
+<%@include file="templates/menu.jsp"%>
 
 	<div class="container">
 		<div class="row">
