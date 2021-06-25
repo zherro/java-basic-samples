@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<title>
+			<ui:insert name="titulo">
+				Crud-Jsf
+			</ui:insert>
+		</title>
+		<!-- in this example CSS File is loades from webapp/resources/css/crudjsf.css  -->
+		<!-- link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/crudjsf.css?ln=css" / -->
+
+		<!-- h:outputScript name="locale-primefaces.js" library="js" / -->
+		<style type="text/css"><!--
+			#topo {
+				text-align: center;
+			} -->
+	    </style> 
+	</h:head>
+	<h:body>
+		<div id="divCentroTemplate">
+			<div id="topo">
+				<ui:insert name="topo">
+		    		<ui:include src="/WEB-INF/template/topo/topo.xhtml"/>
+		    		</ui:insert>
+			</div>
+			<br/>
+			<div id="menu">
+	    		<ui:insert name="menu">
+		    		<ui:include src="/WEB-INF/template/menu/menu.xhtml"/>
+		    	</ui:insert>
+	    	</div>
+	    </div>
+	</h:body>
+</html>

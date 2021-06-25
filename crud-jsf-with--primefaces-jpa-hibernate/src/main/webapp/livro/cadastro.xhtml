@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="corpo">
+    	<p:panel style="width:100%; text-align:center">
+   		
+            <h:form id="livro">
+            	<h:panelGrid id="infoLivro" columns="5">
+            		<p:outputLabel value="Nome Livro: " />
+	            	<p:inputText id="nomeLivro" value="#{livroBean.livro.nome}" style="width: 300px"/>
+	            	
+	            	<p:outputLabel value="ISBN Livro: " />
+	            	<p:inputText id="isbnLivro" value="#{livroBean.livro.isbn}" style="width: 150px"/>
+	            	
+	            	<p:focus context="infoLivro"/>
+	            </h:panelGrid>
+				
+				<h:panelGrid>
+					<p:pickList id="autores" value="#{livroBean.autores}" var="autor" effect="bounce" itemValue="#{autor}" itemLabel="#{autor.nome}" converter="autor"
+						showSourceControls="true" showTargetControls="true" showCheckbox="true" showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains">
+	
+						<f:facet name="sourceCaption">Autores Disponíveis</f:facet>
+						<f:facet name="targetCaption">Autores Associados</f:facet>
+	
+						<p:ajax event="transfer" listener="#{livroBean.autoresTransferidos}" />
+	
+						<p:column style="width:100%;">
+							<h:outputText value="#{autor.nome}" />
+			        	</p:column>
+					</p:pickList>
+					
+					<p:commandButton id="salvarLivro" value="Salvar" action="#{livroBean.salvar()}" update=":livro :listaLivros" style="float:left"/>
+				</h:panelGrid>
+			</h:form>
+            
+            <br/>
+        	<h:form id="listaLivros">
+        		<p:dataTable id="listaLivros" var="livro" value="#{livroBean.livros}" paginator="true" rows="10" rowsPerPageTemplate="5,10,15" emptyMessage="Livros Não Localizados" 
+        				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">  
+			        <f:facet name="header">  
+			            <h:outputText value="Lista de Livros" />  
+			        </f:facet>  
+			  
+			        <p:column>  
+			            <f:facet name="header">  
+			                <h:outputText value="Nome" />  
+			            </f:facet>  
+			            <h:outputText value="#{livro.nome}" />  
+			        </p:column>  
+			  
+			        <p:column>  
+			            <f:facet name="header">  
+			                <h:outputText value="ISBN" />  
+			            </f:facet>  
+			            <h:outputText value="#{livro.isbn}" />  
+			        </p:column>  
+			  
+			        <p:column>  
+			            <f:facet name="header">  
+			                <h:outputText value="" />  
+			            </f:facet>  
+			             <p:commandButton id="editarLivro" value="Editar" action="#{livroBean.editar(livro)}" update=":livro" />  
+			        </p:column> 
+			         
+			        <p:column>  
+			            <f:facet name="header">  
+			                <h:outputText value="" />  
+			            </f:facet>
+			            <p:commandButton id="excluirLivro" value="Excluir" action="#{livroBean.excluir(livro)}" update=":livro :listaLivros" />  
+			        </p:column>  
+			    </p:dataTable> 
+        	</h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="corpo">
+    	<p:panel style="width:100%; text-align:center">
+   			<h:form id="autor">
+   				<h:panelGrid id="infoLivro" columns="6">
+	            	<p:outputLabel value="Nome Autor " />
+	            	<p:inputText id="nomeAutor" value="#{autorBean.autor.nome}" style="width: 300px"/>
+	            	
+	            	<p:outputLabel value="Email: " />
+	            	<p:inputText id="emailAutor" value="#{autorBean.autor.email}" style="width: 150px" />
+	            	
+	            	<p:outputLabel value="Data Nascimento: " />
+	            	<p:calendar id="dataNascimentoAutor" locale="pt_BR" pattern="dd/MM/yyyy" value="#{autorBean.autor.dataNascimento}" />
+	            	
+		           	<p:commandButton id="salvarLivro" value="Salvar" action="#{autorBean.salvar()}" update=":autor :listaAutores" style="float:left"/>
+		           	
+	            	<p:focus context="infoLivro"/>
+	            </h:panelGrid>
+	            
+   			</h:form>
+
+   			<br/>
+        	<h:form id="listaAutores">
+        		<p:dataTable id="listaDeAutores" var="autor" value="#{autorBean.autores}" paginator="true" rows="10" rowsPerPageTemplate="5,10,15" emptyMessage="Autores Não Localizados" 
+        				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">  
+			        <f:facet name="header">  
+			            <h:outputText value="Lista de Autores" />  
+			        </f:facet>  
+			  
+			        <p:column>  
+			            <f:facet name="header">  
+			                <h:outputText value="Nome" />  
+			            </f:facet>  
+			            <h:outputText value="#{autor.nome}" />  
+			        </p:column>  
+			  
+			        <p:column>  
+			            <f:facet name="header">  
+			                <h:outputText value="Email" />  
+			            </f:facet>  
+			            <h:outputText value="#{autor.email}" />  
+			        </p:column>
+			          
+			        <p:column>  
+			            <f:facet name="header">  
+			                <h:outputText value="Data Nascimento" />  
+			            </f:facet>  
+			            <h:outputText value="#{autor.dataNascimento}">
+			            	<f:convertDateTime pattern="dd/MM/yyyy" locale="pt,BR" timeZone="Brazil/East"/>
+			            </h:outputText>  
+			        </p:column>  
+			  
+			        <p:column>  
+			            <f:facet name="header">  
+			                <h:outputText value="" />  
+			            </f:facet>  
+			             <p:commandButton id="editarAutor" value="Editar" update=":autor">
+			             	<f:setPropertyActionListener target="#{autorBean.autor}" value="#{autor}" />
+			             </p:commandButton>  
+			        </p:column> 
+			         
+			        <p:column>  
+			            <f:facet name="header">  
+			                <h:outputText value="" />  
+			            </f:facet>
+			            <p:commandButton id="excluirAutor" value="Excluir" action="#{autorBean.excluir(autor)}" update=":autor :listaAutores" />  
+			        </p:column>  
+			    </p:dataTable> 
+        	</h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
